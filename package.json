@@ -1,0 +1,36 @@
+{
+  "name": "canvas-video-phone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --profile --colors ",
+    "server": "http-server ./static/build -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanHongYousan/canvasVideo-phone.git"
+  },
+  "author": "Evan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvanHongYousan/canvasVideo-phone/issues"
+  },
+  "homepage": "https://github.com/EvanHongYousan/canvasVideo-phone#readme",
+  "dependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.19.0",
+    "jquery": "^2.2.4",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1"
+  }
+}
