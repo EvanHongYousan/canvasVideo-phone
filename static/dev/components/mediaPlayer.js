@@ -2,7 +2,9 @@
  * Created by yantianyu on 2016/7/25 0025.
  */
 
-function mediaPlayerInit() {
+import canvasVideo from './canvasVideo'
+
+function init() {
 
     function timeToTimeStr(time) {
         var time_second = '', time_minute = '', time_hour = '';
@@ -93,4 +95,8 @@ function mediaPlayerInit() {
     });
 }
 
-export default mediaPlayerInit
+let mediaPlayer = {
+    init: init
+};
+
+export default mediaPlayer
