@@ -16,11 +16,6 @@ module.exports = {
         path: BUILD_PATH,
         filename: 'bundle.js'
     },
-    externals: {
-        'jquery': 'jQuery',
-        'react': 'React',
-        'react-dom': 'ReactDOM'
-    },
     plugins: [
         new htmlWebpackPlugin({
             title: '辅导回放',
@@ -39,7 +34,7 @@ module.exports = {
                 loader: 'babel',
                 include: APP_PATH,
                 query: {
-                    presets: ['es2015','react']
+                    presets: ['es2015']
                 }
             },
             {
@@ -49,9 +44,9 @@ module.exports = {
             {
                 test: /\.css$/,
                 // loaders: ['style', 'css']
-                loader:'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+                loader:'style!css-loader'
             }
         ]
     },
-    devtool: false    //'eval-source-map'
+    devtool: 'eval-source-map'    //'eval-source-map'
 };
