@@ -371,9 +371,7 @@ $.ajax({
         var total = timeToTimeStr(parseInt(this.duration));
         $('.simMediaPlay .timeStr .currentTime').text(current);
         var percentStr = parseInt((this.currentTime / this.duration) * 100) + "%";
-        if($('.drapBtn').width() === 20){
-            $('.simMediaPlay .controlBar .colorBar').css('flex', '0 0 ' + percentStr);
-        }
+        $('.simMediaPlay .controlBar .colorBar').css('flex', '0 0 ' + percentStr);
     });
 
     $('.simMediaPlay').delegate('.play', 'click', function () {
@@ -391,6 +389,32 @@ $.ajax({
             $('.simMediaPlay .pause').hide();
             $('.simMediaPlay .play').show();
         }, 0);
+    });
+
+    $('.simMediaPlay .drapBtn').on('touchstart', function () {
+        $(this).attr('data-canMove', 'true');
+    });
+
+    $('.simMediaPlay .drapBtn').on('touchend', function () {
+        $(this).attr('data-canMove', 'false');
+    });
+
+    $('.simMediaPlay .drapBtn').on('touchmove', function (e) {
+        if ($(this).attr('data-canMove') === 'true') {
+            $('.simMediaPlay .controlBar').width();
+            var offset_target = e.touches[0].clientX - $('.simMediaPlay .colorBar').offset().left;
+            var persent_num = parseInt(offset_target / $('.simMediaPlay .controlBar').width() * 100);
+            persent_num = persent_num > 100 ? 100 : persent_num;
+            var persent_str = persent_num + '%';
+            $('.simMediaPlay .controlBar .colorBar').css('flex', '0 0 ' + persent_str);
+
+            var target_sencond = parseInt(persent_num / 100 * $('#audio')[0].duration);
+            $('#audio')[0].currentTime = target_sencond;
+            $('.simMediaPlay .timeStr .currentTime').text(timeToTimeStr(target_sencond));
+
+            $('.simMediaPlay .pause').hide();
+            $('.simMediaPlay .play').show();
+        }
     });
 })();
 

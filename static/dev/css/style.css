@@ -196,9 +196,12 @@ canvas {
 .simMediaPlay .bottom .controlBar .colorBar {
     background-color: #2ac99a;
     height: 100%;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 5px;
     flex: 0 0 0%;
+
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .simMediaPlay .bottom .controlBar .drapBtn {
