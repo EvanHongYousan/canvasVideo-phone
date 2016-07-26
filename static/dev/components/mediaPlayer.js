@@ -49,6 +49,13 @@ function init() {
         var total = timeToTimeStr(parseInt(this.duration));
         $('.simMediaPlay .timeStr .currentTime').text(current);
         var percentStr = parseInt((this.currentTime / this.duration) * 100) + "%";
+
+        var btn_limit_persent = $('.simMediaPlay .drapBtn').width() / $('.simMediaPlay .controlBar').width();
+
+        if ((this.currentTime / this.duration) < btn_limit_persent) {
+            percentStr = parseInt(btn_limit_persent * 100) + '%';
+        }
+
         $('.simMediaPlay .controlBar .colorBar').css('flex', '0 0 ' + percentStr);
     });
 
@@ -85,6 +92,13 @@ function init() {
             var persent_num = parseInt(offset_target / $('.simMediaPlay .controlBar').width() * 100);
             persent_num = persent_num > 100 ? 100 : persent_num;
             var persent_str = persent_num + '%';
+
+            var btn_limit_persent = $('.simMediaPlay .drapBtn').width() / $('.simMediaPlay .controlBar').width();
+            if(persent_num/100<btn_limit_persent){
+                persent_num = btn_limit_persent * 100 ;
+                persent_str = persent_num + '%';
+            }
+
             $('.simMediaPlay .controlBar .colorBar').css('flex', '0 0 ' + persent_str);
 
             var target_sencond = parseInt(persent_num / 100 * $('#audio')[0].duration);
