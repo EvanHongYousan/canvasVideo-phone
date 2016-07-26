@@ -11,14 +11,38 @@ import {JSNativeBridge} from './lib/tools'
 import canvasVideo from './components/canvasVideo'
 import mediaPlayer from './components/mediaPlayer'
 
+function getReqPrm(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"),
+        r = window.location.search.substr(1).match(reg);
+    if (r !== null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
+
+let path = null;
+
+try {
+    path = getReqPrm('path');
+    path = decodeURIComponent(path);
+    path = '/' + path + '/';
+} catch (e) {
+    path = null;
+}
+
+if (path === '/null/' || path === null || path === undefined) {
+    console.log('获取path参数出错，现在对path赋入测试值');
+    path = './test_data/';
+}
+
 $.ajax({
     method: 'GET',
-    url: './test_data/canvas.json',
+    url: path + 'canvas.json',
     success: function (data) {
-        // canvasVideo.init(JSON.parse(data));
-        canvasVideo.init(JSON.parse($('#canvasData').text()));
+        canvasVideo.init(JSON.parse(data));
+        // canvasVideo.init(JSON.parse($('#canvasData').text()));
         setTimeout(function () {
-            $('#audio')[0].src = './test_data/audio.mp3';
+            $('#audio')[0].src = path + 'audio.mp3';
         }, 1000);
     }
 });

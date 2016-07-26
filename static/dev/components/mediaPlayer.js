@@ -3,6 +3,7 @@
  */
 
 import canvasVideo from './canvasVideo'
+import {JSNativeBridge} from '../lib/tools'
 
 function init() {
 
@@ -52,20 +53,21 @@ function init() {
     });
 
     $('.simMediaPlay').delegate('.play', 'click', function () {
-        // alert('fdsa');
+        $('#audio')[0].play();
+        $('.simMediaPlay .pause').show();
+        $('.simMediaPlay .play').hide();
         setTimeout(function () {
-            $('#audio')[0].play();
-            $('.simMediaPlay .pause').show();
-            $('.simMediaPlay .play').hide();
-        }, 0);
+            $('.simMediaPlay').removeClass('hover');
+        }, 1000);
     });
 
     $('.simMediaPlay').delegate('.pause', 'click', function () {
+        $('#audio')[0].pause();
+        $('.simMediaPlay .pause').hide();
+        $('.simMediaPlay .play').show();
         setTimeout(function () {
-            $('#audio')[0].pause();
-            $('.simMediaPlay .pause').hide();
-            $('.simMediaPlay .play').show();
-        }, 0);
+            $('.simMediaPlay').removeClass('hover');
+        }, 1000);
     });
 
     $('.simMediaPlay .drapBtn').on('touchstart', function () {
@@ -92,6 +94,16 @@ function init() {
             $('.simMediaPlay .pause').hide();
             $('.simMediaPlay .play').show();
         }
+    });
+
+    $('.simMediaPlay').click(function () {
+        if (!$(this).hasClass('hover')) {
+            $(this).addClass('hover');
+        }
+    });
+
+    $('.simMediaPlay .top > span').on('touchstart', function () {
+        JSNativeBridge.send('js_msg_close_page', {});
     });
 }
 
